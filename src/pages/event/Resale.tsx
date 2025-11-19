@@ -8,6 +8,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
+import { FairPricingIndicator } from "@/components/marketplace/FairPricingIndicator";
+import { NFTTicketBadge } from "@/components/nft/NFTTicketBadge";
 
 export const Resale = () => {
   const { id } = useParams();
@@ -27,6 +29,7 @@ export const Resale = () => {
       seller: "Verified Fan",
       listedDate: "2025-11-15",
       markup: 5,
+      isNFT: true,
     },
     {
       id: "r2",
@@ -37,6 +40,7 @@ export const Resale = () => {
       seller: "Top Listener",
       listedDate: "2025-11-16",
       markup: 8,
+      isNFT: false,
     },
   ];
 
@@ -92,18 +96,16 @@ export const Resale = () => {
                   <div className="space-y-3">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">{listing.tier.name}</div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <div className="font-semibold">{listing.tier.name}</div>
+                          <NFTTicketBadge isNFT={listing.isNFT} size="sm" />
+                        </div>
                         <div className="text-sm text-muted-foreground">
                           {listing.quantity} {listing.quantity === 1 ? 'ticket' : 'tickets'}
                         </div>
                         <div className="flex items-center gap-2 mt-2">
                           <Badge variant="secondary" className="text-xs">
                             {listing.seller}
-                          </Badge>
-                          <Badge 
-                            className="text-xs bg-live-highlight/20 text-live-highlight border-live-highlight/30"
-                          >
-                            +{listing.markup}% markup
                           </Badge>
                         </div>
                       </div>
@@ -117,6 +119,12 @@ export const Resale = () => {
                         </div>
                       </div>
                     </div>
+                    
+                    <FairPricingIndicator 
+                      originalPrice={listing.originalPrice}
+                      currentPrice={listing.resalePrice}
+                      maxMarkup={10}
+                    />
 
                     <Separator />
 

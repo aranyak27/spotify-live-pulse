@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
+import { NFTTicketBadge } from "@/components/nft/NFTTicketBadge";
 
 export const TicketDetail = () => {
   const { id } = useParams();
@@ -95,11 +96,7 @@ export const TicketDetail = () => {
                 <h1 className="text-2xl font-bold mb-1">{event.artist.name}</h1>
                 <p className="text-muted-foreground">{event.title}</p>
               </div>
-              {ticket.isNFT && (
-                <Badge className="bg-primary text-primary-foreground">
-                  Verified NFT
-                </Badge>
-              )}
+              <NFTTicketBadge isNFT={ticket.isNFT} />
             </div>
 
             <Card className="p-4 space-y-3">
