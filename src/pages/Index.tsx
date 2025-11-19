@@ -1,6 +1,6 @@
 import { MobileLayout } from "@/components/layout/MobileLayout";
-import { mockEvents, mockPlaylists, mockGenres, mockRecentlyPlayed } from "@/data/mockData";
-import { Music, Calendar, Play } from "lucide-react";
+import { mockEvents, mockPlaylists, mockGenres, mockRecentlyPlayed, mockJumpBackIn } from "@/data/mockData";
+import { Music, Calendar, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
@@ -9,6 +9,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 const Index = () => {
@@ -31,7 +33,7 @@ const Index = () => {
         </div>
 
         {/* Live Event Banners - Multiple Carousel */}
-        <div className="px-4">
+        <div className="px-4 relative">
           <Carousel className="w-full">
             <CarouselContent>
               {liveEvents.map((event) => (
@@ -64,7 +66,41 @@ const Index = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
           </Carousel>
+        </div>
+
+        {/* Jump Back In */}
+        <div className="px-4">
+          <h2 className="text-xl font-bold tracking-tight mb-3">Jump back in</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {mockJumpBackIn.map((item) => (
+              <Card 
+                key={item.id}
+                className="p-3 cursor-pointer hover:bg-accent/50 transition-colors"
+              >
+                <div className="space-y-2">
+                  <div className="relative aspect-square rounded overflow-hidden group">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center">
+                        <Play className="h-5 w-5 text-primary-foreground" fill="currentColor" />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm truncate">{item.title}</p>
+                    <p className="text-xs text-muted-foreground truncate">{item.description}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Recently Played */}

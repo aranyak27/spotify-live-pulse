@@ -275,3 +275,32 @@ export const mockRecentlyPlayed = [
     image: "/images/event-midnight.jpg",
   },
 ];
+
+// Mock Songs
+export const mockSongs = [
+  { id: "s1", title: "Sunset", artist: "The Midnight", album: "Endless Summer", duration: "3:45", image: "/images/event-midnight.jpg" },
+  { id: "s2", title: "The Less I Know The Better", artist: "Tame Impala", album: "Currents", duration: "3:36", image: "/images/event-tame.jpg" },
+  { id: "s3", title: "Kill Bill", artist: "SZA", album: "SOS", duration: "2:34", image: "/images/event-sza.jpg" },
+  { id: "s4", title: "Do I Wanna Know?", artist: "Arctic Monkeys", album: "AM", duration: "4:32", image: "/images/artist-arctic.jpg" },
+  { id: "s5", title: "Monsters", artist: "The Midnight", album: "Monsters", duration: "4:12", image: "/images/event-midnight.jpg" },
+  { id: "s6", title: "Let It Happen", artist: "Tame Impala", album: "Currents", duration: "7:47", image: "/images/event-tame.jpg" },
+  { id: "s7", title: "Good Days", artist: "SZA", album: "Good Days", duration: "4:39", image: "/images/event-sza.jpg" },
+  { id: "s8", title: "505", artist: "Arctic Monkeys", album: "Favourite Worst Nightmare", duration: "4:13", image: "/images/artist-arctic.jpg" },
+];
+
+// Mock Albums
+export const mockAlbums = [
+  { id: "a1", title: "Endless Summer", artist: "The Midnight", year: "2016", tracks: 12, image: "/images/event-midnight.jpg" },
+  { id: "a2", title: "Currents", artist: "Tame Impala", year: "2015", tracks: 13, image: "/images/event-tame.jpg" },
+  { id: "a3", title: "SOS", artist: "SZA", year: "2022", tracks: 23, image: "/images/event-sza.jpg" },
+  { id: "a4", title: "AM", artist: "Arctic Monkeys", year: "2013", tracks: 12, image: "/images/artist-arctic.jpg" },
+  { id: "a5", title: "Monsters", artist: "The Midnight", year: "2020", tracks: 10, image: "/images/event-midnight.jpg" },
+];
+
+// Mock Jump Back In
+export const mockJumpBackIn = [
+  { id: "jb1", title: "Daily Mix 1", type: "playlist", image: "/images/event-midnight.jpg", description: "The Midnight, Gunship, and more" },
+  { id: "jb2", title: "Currents", type: "album", image: "/images/event-tame.jpg", description: "Tame Impala" },
+  { id: "jb3", title: "Your Top Songs 2024", type: "playlist", image: "/images/event-sza.jpg", description: "Your most played tracks" },
+  { id: "jb4", title: "Indie Rock Essentials", type: "playlist", image: "/images/artist-arctic.jpg", description: "Arctic Monkeys, The Strokes, and more" },
+];
