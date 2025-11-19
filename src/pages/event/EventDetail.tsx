@@ -10,7 +10,8 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { FriendsAttending } from "@/components/social/FriendsAttending";
 import { ShareEventDialog } from "@/components/social/ShareEventDialog";
-import { mockEventAttendees } from "@/data/mockSocialData";
+import { PlaylistGenerator } from "@/components/social/PlaylistGenerator";
+import { mockEventAttendees, mockEventPlaylists } from "@/data/mockSocialData";
 
 export const EventDetail = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ export const EventDetail = () => {
   
   const event = mockEvents.find(e => e.id === id);
   const attendees = mockEventAttendees.find(a => a.eventId === id);
+  const existingPlaylist = mockEventPlaylists.find(p => p.eventId === id);
   
   if (!event) {
     return (
@@ -136,6 +138,16 @@ export const EventDetail = () => {
               </>
             )}
           </Card>
+
+          {/* Playlist Generator */}
+          {attendees && attendees.totalFriends > 0 && (
+            <PlaylistGenerator
+              eventId={event.id}
+              eventTitle={event.title}
+              attendingFriends={attendees.friends}
+              existingPlaylist={existingPlaylist}
+            />
+          )}
 
           {/* Description */}
           {event.description && (
