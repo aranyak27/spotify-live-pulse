@@ -1,6 +1,8 @@
 import { MobileLayout } from "@/components/layout/MobileLayout";
 import { EventCard } from "@/components/live/EventCard";
 import { mockEvents } from "@/data/mockData";
+import { mockFriendActivity } from "@/data/mockSocialData";
+import { SocialFeed } from "@/components/social/SocialFeed";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bell, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,10 +35,11 @@ export const LiveTab = () => {
         </div>
 
         <Tabs defaultValue="for-you" className="w-full">
-          <TabsList className="w-full grid grid-cols-3 mb-6">
+          <TabsList className="w-full grid grid-cols-4 mb-6">
             <TabsTrigger value="for-you">For You</TabsTrigger>
             <TabsTrigger value="near-you">Near You</TabsTrigger>
             <TabsTrigger value="by-mood">By Mood</TabsTrigger>
+            <TabsTrigger value="social">Social</TabsTrigger>
           </TabsList>
 
           <TabsContent value="for-you" className="space-y-4 animate-fade-in">
@@ -88,6 +91,25 @@ export const LiveTab = () => {
                 <EventCard key={event.id} event={event} />
               ))}
             </div>
+          </TabsContent>
+
+          <TabsContent value="social" className="space-y-4 animate-fade-in">
+            <div>
+              <h2 className="text-lg font-semibold mb-3">Friend Activity</h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                See what concerts your friends are going to
+              </p>
+            </div>
+            {mockFriendActivity.length > 0 ? (
+              <SocialFeed activities={mockFriendActivity} />
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No friend activity yet</p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Connect with friends to see their concert plans
+                </p>
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
