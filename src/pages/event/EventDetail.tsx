@@ -8,13 +8,18 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
 import { useState } from "react";
+import { FriendsAttending } from "@/components/social/FriendsAttending";
+import { ShareEventDialog } from "@/components/social/ShareEventDialog";
+import { mockEventAttendees } from "@/data/mockSocialData";
 
 export const EventDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isFollowing, setIsFollowing] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   
   const event = mockEvents.find(e => e.id === id);
+  const attendees = mockEventAttendees.find(a => a.eventId === id);
   
   if (!event) {
     return (
@@ -64,6 +69,7 @@ export const EventDetail = () => {
                 variant="ghost" 
                 size="icon"
                 className="bg-background/20 backdrop-blur-sm"
+                onClick={() => setShareOpen(true)}
               >
                 <Share2 className="h-5 w-5" />
               </Button>
@@ -119,15 +125,14 @@ export const EventDetail = () => {
               </Button>
             </div>
             
-            {event.friendsAttending && event.friendsAttending > 0 && (
+            {attendees && attendees.totalFriends > 0 && (
               <>
                 <Separator />
-                <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-primary" />
-                  <span className="text-sm">
-                    {event.friendsAttending} friends are going
-                  </span>
-                </div>
+                <FriendsAttending 
+                  friends={attendees.friends} 
+                  total={attendees.totalFriends}
+                  size="lg"
+                />
               </>
             )}
           </Card>
@@ -265,6 +270,12 @@ export const EventDetail = () => {
           </div>
         </div>
       </div>
+
+      <ShareEventDialog 
+        event={event}
+        open={shareOpen}
+        onOpenChange={setShareOpen}
+      />
     </MobileLayout>
   );
 };

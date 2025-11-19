@@ -5,6 +5,8 @@ import { Music, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { SocialFeed } from "@/components/social/SocialFeed";
+import { mockFriendActivity } from "@/data/mockSocialData";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -67,6 +69,11 @@ const Index = () => {
               <EventCard key={event.id} event={event} />
             ))}
           </div>
+        </div>
+
+        {/* Social Feed */}
+        <div className="pb-6">
+          <SocialFeed activities={mockFriendActivity} />
         </div>
       </div>
     </MobileLayout>
