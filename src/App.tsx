@@ -3,8 +3,16 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Pages
 import Index from "./pages/Index";
 import { LiveTab } from "./pages/live/LiveTab";
+import SearchPage from "./pages/SearchPage";
+import ProfilePage from "./pages/ProfilePage";
+import SettingsPage from "./pages/SettingsPage";
+import NotFound from "./pages/NotFound";
+
+// Event Pages
 import { EventDetail } from "./pages/event/EventDetail";
 import { TicketSelection } from "./pages/event/TicketSelection";
 import { Checkout } from "./pages/event/Checkout";
@@ -15,13 +23,13 @@ import { SellTicket } from "./pages/event/SellTicket";
 import { VenueMap } from "./pages/event/VenueMap";
 import { PostEvent } from "./pages/event/PostEvent";
 import { ExclusiveContent } from "./pages/event/ExclusiveContent";
-import FollowedArtists from "./pages/social/FollowedArtists";
+
+// Ticket Pages
 import { YourTickets } from "./pages/tickets/YourTickets";
 import { TicketDetail } from "./pages/tickets/TicketDetail";
-import SearchPage from "./pages/SearchPage";
-import ProfilePage from "./pages/ProfilePage";
-import SettingsPage from "./pages/SettingsPage";
-import NotFound from "./pages/NotFound";
+
+// Social Pages
+import FollowedArtists from "./pages/social/FollowedArtists";
 
 const queryClient = new QueryClient();
 
