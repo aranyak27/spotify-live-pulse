@@ -47,8 +47,14 @@ All colors MUST be HSL.
     --live-low-tickets: 38 92% 50%;
     
     /* Gradient overlays */
-    --gradient-hero: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
-    --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+    --gradient-hero: linear-gradient(180deg, rgba(18, 18, 18, 0) 0%, rgba(18, 18, 18, 0.95) 100%);
+    --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%);
+    --gradient-subtle: linear-gradient(135deg, rgba(30, 215, 96, 0.1) 0%, rgba(30, 215, 96, 0.03) 100%);
+    --gradient-discovery: linear-gradient(to right, transparent, rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 1));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.25);
+    --shadow-glow: 0 0 30px rgba(30, 215, 96, 0.15);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
