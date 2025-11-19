@@ -1,78 +1,117 @@
 import { MobileLayout } from "@/components/layout/MobileLayout";
 import { EventCard } from "@/components/live/EventCard";
 import { mockEvents } from "@/data/mockData";
-import { Music, Sparkles } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Music, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { SocialFeed } from "@/components/social/SocialFeed";
 import { mockFriendActivity } from "@/data/mockSocialData";
+import { format } from "date-fns";
 
 const Index = () => {
   const navigate = useNavigate();
   const featuredEvent = mockEvents[0];
+  const presaleEvents = mockEvents.filter(e => e.isFanPresale);
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 18) return "Good afternoon";
+    return "Good evening";
+  };
 
   return (
     <MobileLayout>
-      <div className="px-4 pt-6 space-y-6">
+      <div className="space-y-6">
         {/* Header */}
-        <div className="flex items-center gap-3">
-          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
-            <Music className="h-6 w-6 text-background" />
+        <div className="px-4 pt-6 flex items-center gap-3">
+          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+            <Music className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Good evening</h1>
-            <p className="text-sm text-muted-foreground">Your music, now live</p>
+            <h1 className="text-2xl font-bold tracking-tight">{getGreeting()}</h1>
+            <p className="text-sm text-muted-foreground">Discover live music</p>
           </div>
         </div>
 
-        {/* Live Event Banner */}
-        <Card className="p-4 bg-gradient-to-br from-live-presale/20 to-primary/10 border-live-presale/30">
-          <div className="flex items-start gap-3">
-            <Sparkles className="h-6 w-6 text-live-presale animate-pulse-glow" />
-            <div className="flex-1">
-              <h3 className="font-semibold mb-1">Fans First Presale</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                You're a top listener! Get early access to tickets
-              </p>
+        {/* Featured Live Show - Hero style */}
+        <div className="relative h-[280px] overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ 
+              backgroundImage: `url(${featuredEvent.image})`,
+            }}
+          />
+          <div 
+            className="absolute inset-0"
+            style={{ background: 'var(--gradient-hero)' }}
+          />
+          
+          <div className="absolute inset-0 flex flex-col justify-end p-6">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs text-gray-300">
+                <Calendar className="h-3.5 w-3.5" />
+                <span>{format(new Date(featuredEvent.date), "EEEE, MMM d")}</span>
+              </div>
+              <h2 className="text-3xl font-bold text-white leading-tight">
+                {featuredEvent.artist.name}
+              </h2>
+              <p className="text-sm text-gray-200">{featuredEvent.venue.name}, {featuredEvent.venue.city}</p>
               <Button 
                 size="sm" 
-                className="bg-live-presale hover:bg-live-presale/90"
-                onClick={() => navigate("/live")}
+                className="mt-3 bg-white text-black hover:bg-gray-100"
+                onClick={() => navigate(`/event/${featuredEvent.id}`)}
               >
-                View Presales
+                View show
               </Button>
             </div>
           </div>
-        </Card>
-
-        {/* Concerts Near You */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold">Concerts Near You</h2>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={() => navigate("/live")}
-            >
-              See all
-            </Button>
-          </div>
-          <EventCard event={featuredEvent} />
         </div>
 
-        {/* Because You Listen To... */}
-        <div>
-          <h2 className="text-xl font-bold mb-4">Because You Listen To</h2>
-          <div className="space-y-4">
+        {/* Live shows for you */}
+        {presaleEvents.length > 0 && (
+          <div className="px-4">
+            <div className="flex items-baseline justify-between mb-3">
+              <h2 className="text-xl font-bold tracking-tight">Live shows for you</h2>
+              <button 
+                className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => navigate("/live")}
+              >
+                Show all
+              </button>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">
+              Early access based on your listening
+            </p>
+            <div className="space-y-3">
+              {presaleEvents.slice(0, 2).map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Concerts near you */}
+        <div className="px-4">
+          <div className="flex items-baseline justify-between mb-3">
+            <h2 className="text-xl font-bold tracking-tight">Concerts near you</h2>
+            <button 
+              className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => navigate("/live")}
+            >
+              Show all
+            </button>
+          </div>
+          <div className="space-y-3">
             {mockEvents.slice(1, 3).map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         </div>
 
-        {/* Social Feed */}
-        <div className="pb-6">
+        {/* Friend Activity */}
+        <div className="px-4 pb-6">
+          <h2 className="text-xl font-bold tracking-tight mb-4">Friend activity</h2>
           <SocialFeed activities={mockFriendActivity} />
         </div>
       </div>
