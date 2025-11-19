@@ -1,17 +1,19 @@
 import { MobileLayout } from "@/components/layout/MobileLayout";
-import { EventCard } from "@/components/live/EventCard";
-import { mockEvents } from "@/data/mockData";
-import { Music, Calendar } from "lucide-react";
+import { mockEvents, mockPlaylists, mockGenres, mockRecentlyPlayed } from "@/data/mockData";
+import { Music, Calendar, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { SocialFeed } from "@/components/social/SocialFeed";
-import { mockFriendActivity } from "@/data/mockSocialData";
 import { format } from "date-fns";
+import { Card } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 const Index = () => {
   const navigate = useNavigate();
-  const featuredEvent = mockEvents[0];
-  const presaleEvents = mockEvents.filter(e => e.isFanPresale);
+  const liveEvents = mockEvents.slice(0, 3);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -22,97 +24,149 @@ const Index = () => {
 
   return (
     <MobileLayout>
-      <div className="space-y-6">
+      <div className="space-y-6 pb-6">
         {/* Header */}
-        <div className="px-4 pt-6 flex items-center gap-3">
-          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
-            <Music className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">{getGreeting()}</h1>
-            <p className="text-sm text-muted-foreground">Discover live music</p>
-          </div>
+        <div className="px-4 pt-6">
+          <h1 className="text-2xl font-bold tracking-tight">{getGreeting()}</h1>
         </div>
 
-        {/* Featured Live Show - Hero style */}
-        <div className="relative h-[280px] overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ 
-              backgroundImage: `url(${featuredEvent.image})`,
-            }}
-          />
-          <div 
-            className="absolute inset-0"
-            style={{ background: 'var(--gradient-hero)' }}
-          />
-          
-          <div className="absolute inset-0 flex flex-col justify-end p-6">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs text-gray-300">
-                <Calendar className="h-3.5 w-3.5" />
-                <span>{format(new Date(featuredEvent.date), "EEEE, MMM d")}</span>
-              </div>
-              <h2 className="text-3xl font-bold text-white leading-tight">
-                {featuredEvent.artist.name}
-              </h2>
-              <p className="text-sm text-gray-200">{featuredEvent.venue.name}, {featuredEvent.venue.city}</p>
-              <Button 
-                size="sm" 
-                className="mt-3 bg-white text-black hover:bg-gray-100"
-                onClick={() => navigate(`/event/${featuredEvent.id}`)}
-              >
-                View show
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Live shows for you */}
-        {presaleEvents.length > 0 && (
-          <div className="px-4">
-            <div className="flex items-baseline justify-between mb-3">
-              <h2 className="text-xl font-bold tracking-tight">Live shows for you</h2>
-              <button 
-                className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => navigate("/live")}
-              >
-                Show all
-              </button>
-            </div>
-            <p className="text-sm text-muted-foreground mb-4">
-              Early access based on your listening
-            </p>
-            <div className="space-y-3">
-              {presaleEvents.slice(0, 2).map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Concerts near you */}
+        {/* Live Event Banners - Multiple Carousel */}
         <div className="px-4">
-          <div className="flex items-baseline justify-between mb-3">
-            <h2 className="text-xl font-bold tracking-tight">Concerts near you</h2>
-            <button 
-              className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => navigate("/live")}
-            >
-              Show all
-            </button>
-          </div>
-          <div className="space-y-3">
-            {mockEvents.slice(1, 3).map((event) => (
-              <EventCard key={event.id} event={event} />
+          <Carousel className="w-full">
+            <CarouselContent>
+              {liveEvents.map((event) => (
+                <CarouselItem key={event.id}>
+                  <div 
+                    className="relative h-[200px] overflow-hidden rounded-lg cursor-pointer"
+                    onClick={() => navigate(`/event/${event.id}`)}
+                  >
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${event.image})` }}
+                    />
+                    <div 
+                      className="absolute inset-0"
+                      style={{ background: 'var(--gradient-hero)' }}
+                    />
+                    <div className="absolute inset-0 flex flex-col justify-end p-5">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2 text-xs text-gray-300">
+                          <Calendar className="h-3.5 w-3.5" />
+                          <span>{format(new Date(event.date), "EEE, MMM d")}</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white leading-tight">
+                          {event.artist.name}
+                        </h3>
+                        <p className="text-sm text-gray-200">{event.venue.city}</p>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+
+        {/* Recently Played */}
+        <div className="px-4">
+          <h2 className="text-xl font-bold tracking-tight mb-3">Recently played</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {mockRecentlyPlayed.slice(0, 4).map((track) => (
+              <Card 
+                key={track.id} 
+                className="p-3 cursor-pointer hover:bg-accent/50 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative h-12 w-12 rounded overflow-hidden flex-shrink-0">
+                    <img 
+                      src={track.image} 
+                      alt={track.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-semibold text-sm truncate">{track.title}</p>
+                    <p className="text-xs text-muted-foreground truncate">{track.artist}</p>
+                  </div>
+                </div>
+              </Card>
             ))}
           </div>
         </div>
 
-        {/* Friend Activity */}
-        <div className="px-4 pb-6">
-          <h2 className="text-xl font-bold tracking-tight mb-4">Friend activity</h2>
-          <SocialFeed activities={mockFriendActivity} />
+        {/* Your Top Genres */}
+        <div className="px-4">
+          <h2 className="text-xl font-bold tracking-tight mb-3">Your top genres</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {mockGenres.slice(0, 4).map((genre) => (
+              <div
+                key={genre.id}
+                className={`h-24 rounded-lg bg-gradient-to-br ${genre.color} p-4 cursor-pointer hover:scale-105 transition-transform`}
+              >
+                <h3 className="text-lg font-bold text-white">{genre.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Made For You */}
+        <div className="px-4">
+          <h2 className="text-xl font-bold tracking-tight mb-3">Made for you</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {mockPlaylists.slice(0, 4).map((playlist) => (
+              <Card 
+                key={playlist.id}
+                className="p-3 cursor-pointer hover:bg-accent/50 transition-colors"
+              >
+                <div className="space-y-2">
+                  <div className="relative aspect-square rounded overflow-hidden group">
+                    <img 
+                      src={playlist.image} 
+                      alt={playlist.name}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center">
+                        <Play className="h-5 w-5 text-primary-foreground" fill="currentColor" />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm truncate">{playlist.name}</p>
+                    <p className="text-xs text-muted-foreground truncate">{playlist.description}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Your Mixes */}
+        <div className="px-4">
+          <h2 className="text-xl font-bold tracking-tight mb-3">Your mixes</h2>
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
+            {mockPlaylists.map((playlist) => (
+              <div 
+                key={playlist.id}
+                className="flex-shrink-0 w-36 cursor-pointer group"
+              >
+                <div className="relative aspect-square rounded overflow-hidden mb-2">
+                  <img 
+                    src={playlist.image} 
+                    alt={playlist.name}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center">
+                      <Play className="h-5 w-5 text-primary-foreground" fill="currentColor" />
+                    </div>
+                  </div>
+                </div>
+                <p className="font-semibold text-sm truncate">{playlist.name}</p>
+                <p className="text-xs text-muted-foreground truncate">{playlist.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </MobileLayout>
