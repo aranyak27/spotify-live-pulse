@@ -15,6 +15,7 @@ import { SellTicket } from "./pages/event/SellTicket";
 import { VenueMap } from "./pages/event/VenueMap";
 import { PostEvent } from "./pages/event/PostEvent";
 import { ExclusiveContent } from "./pages/event/ExclusiveContent";
+import FollowedArtists from "./pages/social/FollowedArtists";
 import { YourTickets } from "./pages/tickets/YourTickets";
 import { TicketDetail } from "./pages/tickets/TicketDetail";
 import SearchPage from "./pages/SearchPage";
@@ -47,6 +48,7 @@ const App = () => (
           <Route path="/event/:id/waitlist" element={<Waitlist />} />
           <Route path="/event/:id/venue-map" element={<VenueMap />} />
           <Route path="/event/:id/exclusive" element={<ExclusiveContent />} />
+          <Route path="/followed" element={<FollowedArtists />} />
           <Route path="/settings" element={<SettingsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

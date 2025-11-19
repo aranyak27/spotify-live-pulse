@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { FriendsAttending } from "@/components/social/FriendsAttending";
+import { mockEventAttendees } from "@/data/mockSocialData";
 
 interface EventCardProps {
   event: Event;
@@ -12,6 +14,7 @@ interface EventCardProps {
 
 export const EventCard = ({ event, variant = "compact" }: EventCardProps) => {
   const navigate = useNavigate();
+  const attendees = mockEventAttendees.find(a => a.eventId === event.id);
   
   const formattedDate = format(new Date(event.date), "MMM d");
   const lowestPrice = Math.min(...event.ticketTiers.map(t => t.price));
@@ -80,10 +83,12 @@ export const EventCard = ({ event, variant = "compact" }: EventCardProps) => {
           </div>
         </div>
 
-        {event.friendsAttending && event.friendsAttending > 0 && (
-          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-            <Users className="h-4 w-4" />
-            <span>{event.friendsAttending} friends going</span>
+        {attendees && attendees.totalFriends > 0 && (
+          <div className="pt-3 border-t border-border/50">
+            <FriendsAttending 
+              friends={attendees.friends} 
+              total={attendees.totalFriends}
+            />
           </div>
         )}
 

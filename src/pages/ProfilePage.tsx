@@ -10,7 +10,7 @@ const ProfilePage = () => {
 
   const menuItems = [
     { icon: Ticket, label: "Your Tickets", to: "/tickets", badge: "1" },
-    { icon: Heart, label: "Followed Artists", to: "/followed" },
+    { icon: Heart, label: "Followed Artists", to: "/followed", badge: "4" },
     { icon: Calendar, label: "Upcoming Shows", to: "/upcoming" },
     { icon: Settings, label: "Settings", to: "/settings" },
   ];
