@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { MobileLayout } from "@/components/layout/MobileLayout";
 import { mockEvents } from "@/data/mockData";
-import { ArrowLeft, Share2, MapPin, Calendar, Clock, Users, Heart } from "lucide-react";
+import { ArrowLeft, Share2, MapPin, Calendar, Clock, Users, Heart, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -113,7 +113,8 @@ export const EventDetail = () => {
                   {event.venue.address}, {event.venue.city}
                 </div>
               </div>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="gap-2">
+                <Navigation className="h-3.5 w-3.5" />
                 Map
               </Button>
             </div>
