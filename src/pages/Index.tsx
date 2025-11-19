@@ -12,6 +12,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ArtistDashboardWidget } from "@/components/home/ArtistDashboardWidget";
+import { WaitlistNotification } from "@/components/waitlist/WaitlistNotification";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -30,6 +32,16 @@ const Index = () => {
         {/* Header */}
         <div className="px-4 pt-6">
           <h1 className="text-2xl font-bold tracking-tight">{getGreeting()}</h1>
+        </div>
+
+        {/* Waitlist Notifications */}
+        <div className="px-4">
+          <WaitlistNotification />
+        </div>
+
+        {/* Artist Dashboard Widget */}
+        <div className="px-4">
+          <ArtistDashboardWidget />
         </div>
 
         {/* Live Event Banners - Multiple Carousel */}
