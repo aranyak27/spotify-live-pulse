@@ -33,3 +33,28 @@ export interface FollowedArtist {
   upcomingShows: number;
   hasNotifications: boolean;
 }
+
+export interface Track {
+  id: string;
+  title: string;
+  artist: string;
+  albumArt: string;
+  duration: number; // in seconds
+  previewUrl?: string;
+}
+
+export interface FriendTopTrack {
+  friendId: string;
+  friendName: string;
+  track: Track;
+}
+
+export interface EventPlaylist {
+  id: string;
+  eventId: string;
+  eventTitle: string;
+  tracks: Track[];
+  contributingFriends: Friend[];
+  generatedDate: string;
+  totalDuration: number; // in seconds
+}

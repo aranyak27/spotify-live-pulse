@@ -1,4 +1,4 @@
-import { Friend, FriendActivity, EventAttendee, FollowedArtist } from "@/types/social";
+import { Friend, FriendActivity, EventAttendee, FollowedArtist, Track, FriendTopTrack, EventPlaylist } from "@/types/social";
 import { mockEvents, mockArtists } from "./mockData";
 
 export const mockFriends: Friend[] = [
@@ -132,5 +132,80 @@ export const mockFollowedArtists: FollowedArtist[] = [
     followedDate: "2024-10-05T18:45:00Z",
     upcomingShows: 2,
     hasNotifications: true,
+  },
+];
+
+export const mockTracks: Track[] = [
+  {
+    id: "t1",
+    title: "Synthetic",
+    artist: "The Midnight",
+    albumArt: "/images/event-midnight.jpg",
+    duration: 245,
+  },
+  {
+    id: "t2",
+    title: "The Less I Know The Better",
+    artist: "Tame Impala",
+    albumArt: "/images/event-tame.jpg",
+    duration: 216,
+  },
+  {
+    id: "t3",
+    title: "Kill Bill",
+    artist: "SZA",
+    albumArt: "/images/event-sza.jpg",
+    duration: 153,
+  },
+  {
+    id: "t4",
+    title: "Do I Wanna Know?",
+    artist: "Arctic Monkeys",
+    albumArt: "/placeholder.svg",
+    duration: 272,
+  },
+  {
+    id: "t5",
+    title: "Lost Boy",
+    artist: "The Midnight",
+    albumArt: "/images/event-midnight.jpg",
+    duration: 228,
+  },
+  {
+    id: "t6",
+    title: "Good Days",
+    artist: "SZA",
+    albumArt: "/images/event-sza.jpg",
+    duration: 279,
+  },
+];
+
+export const mockFriendTopTracks: FriendTopTrack[] = [
+  { friendId: "f1", friendName: "Sarah Chen", track: mockTracks[0] },
+  { friendId: "f1", friendName: "Sarah Chen", track: mockTracks[4] },
+  { friendId: "f2", friendName: "Mike Johnson", track: mockTracks[1] },
+  { friendId: "f3", friendName: "Emma Davis", track: mockTracks[2] },
+  { friendId: "f3", friendName: "Emma Davis", track: mockTracks[5] },
+  { friendId: "f4", friendName: "James Wilson", track: mockTracks[3] },
+];
+
+export const mockEventPlaylists: EventPlaylist[] = [
+  {
+    id: "pl1",
+    eventId: "1",
+    eventTitle: mockEvents[0].title,
+    tracks: [mockTracks[0], mockTracks[4], mockTracks[2]],
+    contributingFriends: [mockFriends[0], mockFriends[2]],
+    generatedDate: "2025-11-19T10:00:00Z",
+    totalDuration: 626,
+  },
+  {
+    id: "pl2",
+    eventId: "2",
+    eventTitle: mockEvents[1].title,
+    tracks: [mockTracks[1], mockTracks[3]],
+    contributingFriends: [mockFriends[1], mockFriends[3]],
+    generatedDate: "2025-11-19T11:30:00Z",
+    totalDuration: 488,
   },
 ];
