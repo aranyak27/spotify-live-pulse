@@ -199,3 +199,79 @@ export const mockTickets: Ticket[] = [
     isNFT: true,
   },
 ];
+
+// Mock Playlists
+export const mockPlaylists = [
+  {
+    id: "p1",
+    name: "Your Top Songs 2024",
+    description: "Your most played tracks this year",
+    image: "/images/event-midnight.jpg",
+    trackCount: 50,
+  },
+  {
+    id: "p2",
+    name: "Daily Mix 1",
+    description: "The Midnight, Tame Impala, and more",
+    image: "/images/event-tame.jpg",
+    trackCount: 50,
+  },
+  {
+    id: "p3",
+    name: "Discover Weekly",
+    description: "Your weekly mixtape of fresh music",
+    image: "/images/event-sza.jpg",
+    trackCount: 30,
+  },
+  {
+    id: "p4",
+    name: "Release Radar",
+    description: "New music from artists you love",
+    image: "/images/event-midnight.jpg",
+    trackCount: 40,
+  },
+];
+
+// Mock Genres
+export const mockGenres = [
+  { id: "g1", name: "Synthwave", color: "from-purple-500 to-pink-500" },
+  { id: "g2", name: "Indie Rock", color: "from-green-500 to-teal-500" },
+  { id: "g3", name: "R&B", color: "from-orange-500 to-red-500" },
+  { id: "g4", name: "Electronic", color: "from-blue-500 to-cyan-500" },
+  { id: "g5", name: "Alternative", color: "from-yellow-500 to-orange-500" },
+  { id: "g6", name: "Psychedelic", color: "from-pink-500 to-purple-500" },
+];
+
+// Mock Recently Played
+export const mockRecentlyPlayed = [
+  {
+    id: "rp1",
+    title: "Sunset",
+    artist: "The Midnight",
+    image: "/images/event-midnight.jpg",
+  },
+  {
+    id: "rp2",
+    title: "The Less I Know The Better",
+    artist: "Tame Impala",
+    image: "/images/event-tame.jpg",
+  },
+  {
+    id: "rp3",
+    title: "Kill Bill",
+    artist: "SZA",
+    image: "/images/event-sza.jpg",
+  },
+  {
+    id: "rp4",
+    title: "Do I Wanna Know?",
+    artist: "Arctic Monkeys",
+    image: "/images/artist-arctic.jpg",
+  },
+  {
+    id: "rp5",
+    title: "Time Moves Slow",
+    artist: "BADBADNOTGOOD",
+    image: "/images/event-midnight.jpg",
+  },
+];
