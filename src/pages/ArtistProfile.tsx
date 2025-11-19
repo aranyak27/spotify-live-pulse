@@ -2,7 +2,7 @@ import { MobileLayout } from "@/components/layout/MobileLayout";
 import { useParams, useNavigate } from "react-router-dom";
 import { mockArtists, mockEvents, mockSongs, mockAlbums } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Play, Shuffle, Users, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -86,6 +86,25 @@ const ArtistProfile = () => {
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6 mt-4">
+            {/* Artist Dashboard Link */}
+            {artist.id === "1" && (
+              <div className="px-4">
+                <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-semibold mb-1">Artist Tools</p>
+                        <p className="text-xs text-muted-foreground">Manage shows, view analytics & connect with fans</p>
+                      </div>
+                      <Button size="sm" onClick={() => navigate("/artist/dashboard")}>
+                        Dashboard
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
             {/* Popular Tracks */}
             <div className="px-4">
               <h2 className="text-xl font-bold mb-3">Popular</h2>

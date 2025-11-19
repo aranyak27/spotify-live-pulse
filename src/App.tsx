@@ -12,6 +12,7 @@ import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 import ArtistProfile from "./pages/ArtistProfile";
+import ArtistDashboard from "./pages/artist/ArtistDashboard";
 
 // Event Pages
 import { EventDetail } from "./pages/event/EventDetail";
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/search" element={<SearchPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/artist/:id" element={<ArtistProfile />} />
+          <Route path="/artist/dashboard" element={<ArtistDashboard />} />
           <Route path="/tickets" element={<YourTickets />} />
           <Route path="/ticket/:id" element={<TicketDetail />} />
           <Route path="/ticket/:id/sell" element={<SellTicket />} />
