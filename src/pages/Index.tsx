@@ -12,7 +12,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ArtistDashboardWidget } from "@/components/home/ArtistDashboardWidget";
 import { WaitlistNotification } from "@/components/waitlist/WaitlistNotification";
 
 const Index = () => {
@@ -37,11 +36,6 @@ const Index = () => {
         {/* Waitlist Notifications */}
         <div className="px-4">
           <WaitlistNotification />
-        </div>
-
-        {/* Artist Dashboard Widget */}
-        <div className="px-4">
-          <ArtistDashboardWidget />
         </div>
 
         {/* Live Event Banners - Multiple Carousel */}
