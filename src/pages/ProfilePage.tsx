@@ -2,8 +2,10 @@ import { MobileLayout } from "@/components/layout/MobileLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Settings, Ticket, Heart, Calendar, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { ArtistDashboardWidget } from "@/components/home/ArtistDashboardWidget";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -38,6 +40,17 @@ const ProfilePage = () => {
             </div>
           </div>
         </Card>
+
+        {/* Artist Dashboard Widget */}
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-muted-foreground">Artist Tools</h3>
+            <Badge variant="secondary" className="text-xs">
+              Only available in artist persona
+            </Badge>
+          </div>
+          <ArtistDashboardWidget />
+        </div>
 
         <div className="space-y-2">
           {menuItems.map((item) => (
